@@ -1,0 +1,12 @@
+[submodule "molecular-util"]
+	path = molecular-util
+	url = git@github.com:cmdrf/molecular-util.git
+[submodule "molecular-gfx"]
+	path = molecular-gfx
+	url = git@github.com:cmdrf/molecular-gfx.git
+[submodule "molecular-programgenerator"]
+	path = molecular-programgenerator
+	url = git@github.com:cmdrf/molecular-programgenerator.git
+[submodule "molecular-meshfile"]
+	path = molecular-meshfile
+	url = git@github.com:cmdrf/molecular-meshfile.git

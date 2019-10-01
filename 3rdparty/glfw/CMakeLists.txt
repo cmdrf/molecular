@@ -16,9 +16,8 @@ if(APPLE AND MOLECULAR_ENABLE_VULKAN)
 endif()
 
 ExternalProject_Add(external_glfw
-	GIT_REPOSITORY https://github.com/glfw/glfw.git
-	GIT_TAG 34d20b0f03df5926882611041354d558c0b364dd
-#	UPDATE_COMMAND ""
+	URL https://github.com/glfw/glfw/archive/3.3.tar.gz
+	URL_MD5 5be03812f5d109817e6558c3fab7bbe1
 	PREFIX ${GLFW_PREFIX}
 	${EXTERNAL_GLFW_OPTIONS}
 	CMAKE_ARGS
@@ -41,6 +40,6 @@ elseif(APPLE)
 else()
 	set_target_properties(glfw PROPERTIES INTERFACE_LINK_LIBRARIES "Xrandr;Xi;dl;X11;Xxf86vm;Xinerama;Xcursor")
 endif()
-target_include_directories(glfw INTERFACE "${GLFW_INCLUDE_DIR}")
+set_target_properties(glfw PROPERTIES INTERFACE_INCLUDE_DIRS "${GLFW_INCLUDE_DIR}")
 
 add_dependencies(glfw external_glfw)

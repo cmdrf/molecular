@@ -1,0 +1,7 @@
+/** @namespace molecular::gfx
+	@brief Molecular graphics classes
+*/
+
+/** @namespace molecular::util
+	@brief Molecular utility classes
+*/

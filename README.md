@@ -9,7 +9,7 @@ See description of [molecular-gfx](https://github.com/cmdrf/molecular-gfx/blob/m
 
 MIT License
 
-Copyright (c) 2019 Fabian
+Copyright (c) 2019-2020 Fabian Herb
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

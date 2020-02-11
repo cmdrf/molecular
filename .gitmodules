@@ -10,3 +10,6 @@
 [submodule "molecular-meshfile"]
 	path = molecular-meshfile
 	url = https://github.com/cmdrf/molecular-meshfile.git
+[submodule "molecular-tools"]
+	path = molecular-tools
+	url = https://github.com/cmdrf/molecular-tools.git

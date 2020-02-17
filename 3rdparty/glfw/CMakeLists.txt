@@ -24,22 +24,25 @@ ExternalProject_Add(external_glfw
 	    ${EXTERNAL_CMAKE_ARGS}
 		-DCMAKE_INSTALL_PREFIX:PATH=${INSTALL_PREFIX}
 	BUILD_BYPRODUCTS ${GLFW_LIBRARY}
+	EXCLUDE_FROM_ALL
 )
-set_target_properties(external_glfw PROPERTIES EXCLUDE_FROM_ALL TRUE)
 
-add_library(glfw STATIC IMPORTED GLOBAL)
-set_target_properties(glfw PROPERTIES IMPORTED_LOCATION ${GLFW_LIBRARY})
+add_library(glfw-imported STATIC IMPORTED GLOBAL)
+set_target_properties(glfw-imported PROPERTIES IMPORTED_LOCATION ${GLFW_LIBRARY})
+add_dependencies(glfw-imported external_glfw)
+
+add_library(glfw INTERFACE)
+target_link_libraries(glfw INTERFACE glfw-imported)
 
 if(WIN32)
-	set_target_properties(glfw PROPERTIES INTERFACE_LINK_LIBRARIES "winmm;ws2_32;dinput8;dxguid;user32;gdi32")
+	target_link_libraries(glfw INTERFACE winmm ws2_32 dinput8 dxguid user32 gdi32)
 elseif(APPLE)
 	find_library(COCOA_LIBRARY Cocoa)
 	find_library(IOKIT_LIBRARY IOKit)
 	find_library(QUARTZCORE_LIBRARY QuartzCore)
-	set_target_properties(glfw PROPERTIES INTERFACE_LINK_LIBRARIES "${COCOA_LIBRARY};${IOKIT_LIBRARY};${QUARTZCORE_LIBRARY}")
+	target_link_libraries(glfw INTERFACE "${COCOA_LIBRARY}" "${IOKIT_LIBRARY}" "${QUARTZCORE_LIBRARY}")
 else()
-	set_target_properties(glfw PROPERTIES INTERFACE_LINK_LIBRARIES "Xrandr;Xi;dl;X11;Xxf86vm;Xinerama;Xcursor")
+	target_link_libraries(glfw INTERFACE Xrandr Xi dl X11 Xxf86vm Xinerama Xcursor)
 endif()
-set_target_properties(glfw PROPERTIES INTERFACE_INCLUDE_DIRS "${GLFW_INCLUDE_DIR}")
+target_include_directories(glfw INTERFACE "${GLFW_INCLUDE_DIR}")
 
-add_dependencies(glfw external_glfw)
